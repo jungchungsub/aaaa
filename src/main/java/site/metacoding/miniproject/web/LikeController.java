@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.miniproject.domain.like.personalike.PersonalLike;
 import site.metacoding.miniproject.service.personal.PersonalLikeService;
 import site.metacoding.miniproject.web.dto.request.InsertRecommendDto;
 import site.metacoding.miniproject.web.dto.request.PersonalLikeDto;
@@ -67,7 +68,15 @@ public class LikeController {
 		model.addAttribute("personalLikeList", personalLikeDto);
 		return "/company/recommend";
 	}
+	
+	@GetMapping("/resume/{resumesId}")
+	   public String companyInsert(@PathVariable Integer resumesId, Model model) {
 
+	      SignedDto<?> signedDto = (SignedDto) session.getAttribute("principal");
+	      PersonalLike personalLike = personalLikeService.좋아요확인(resumesId, signedDto.getCompanyId());  
+	      model.addAttribute("personalLike", personalLike);
+	      return "/company/resumes";
+	   }
 
 
 }

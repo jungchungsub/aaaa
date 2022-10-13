@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.miniproject.domain.like.companylike.CompanyLike;
 import site.metacoding.miniproject.domain.like.personalike.PersonalLike;
 import site.metacoding.miniproject.domain.like.personalike.PersonalLikesDao;
 import site.metacoding.miniproject.domain.resumes.ResumesDao;
@@ -36,6 +37,14 @@ public class PersonalLikeService {
 	public void 좋아요이력서추가(InsertRecommendDto insertRecommendDto) {
 		resumesDao.insertLike(insertRecommendDto);
 	}
+	
+	   public PersonalLike 좋아요확인(Integer companyId,Integer resumesId) {
+		   PersonalLike personalLike = new PersonalLike(companyId, resumesId);
+		   PersonalLike companyLike2 = personalLikesDao.findById(personalLike);
+		      return companyLike2;
+		   }
+	   
+	 
 
 
 }

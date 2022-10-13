@@ -31,8 +31,21 @@
 		<div id="summernote"></div>
 	</div>
 	<div class="btn-update">
-		<button id="btnlike" type="button" class="btn btn-primary">좋아요</button>
-
+		<c:choose>
+			<c:when test="${ empty principal }">
+				<button type="button" class="btn btn-primary">로그인</button>
+			</c:when>
+			<c:otherwise>
+				<c:choose>
+					<c:when test="${ empty companyLike}">
+						<button id="btnlike" type="button" class="btn btn-primary">좋아요</button>
+					</c:when>
+					<c:otherwise>
+						<button id="btnlike" type="button" class="btn btn-primary">좋아요취소</button>
+					</c:otherwise>
+				</c:choose>
+			</c:otherwise>
+		</c:choose>
 		<button id="btnapply" type="button" class="btn btn-primary">연락하기</button>
 	</div>
 

@@ -19,5 +19,9 @@
 		ON p.resumes_id = r.resumes_id
 	</select>
 
+	<select id="findById" resultType="site.metacoding.miniproject.domain.like.personalike.PersonalLike">
+		SELECT * FROM company_like WHERE company_id =#{companyId} and personal_Id =#{personalId}
+	</select>
+
 
 </mapper>
