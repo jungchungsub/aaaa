@@ -32,8 +32,6 @@ public class UsersService {
 	private final UsersDao usersDao;
 	private final CompanyDao companyDao;
 	private final PersonalDao personalDao;
-	private final PersonalDetailDao personalDetailDao;
-	private final CompanyDetailDao companyDetailDao;
 	private final CategoryDao categoryDao;
 	private final AlarmDao alarmDao;
 
@@ -72,7 +70,6 @@ public class UsersService {
 		joinDto.setPersonalId(personalId);
 
 		PersonalDetail personalDetail = new PersonalDetail(joinDto);
-		personalDetailDao.insert(personalDetail);
 
 		Users users = new Users(joinDto);
 		usersDao.insert(users);
@@ -88,7 +85,6 @@ public class UsersService {
 		joinDto.setCompanyId(companyId);
 
 		CompanyDetail companyDetail = new CompanyDetail(joinDto);
-		companyDetailDao.insert(companyDetail);
 
 		Users users = new Users(joinDto);
 		usersDao.insert(users);
