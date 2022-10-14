@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.miniproject.domain.personal.Personal;
 import site.metacoding.miniproject.domain.resumes.Resumes;
 import site.metacoding.miniproject.service.personal.PersonalService;
 import site.metacoding.miniproject.web.dto.request.InsertResumesDto;
@@ -78,5 +79,20 @@ public class PersonalController {
 		List<Resumes> resumesList = personalService.resumesAll();
 		model.addAttribute("resumesList", resumesList);
 		return "company/main";
+	}
+	
+	// 내정보 보기
+	@GetMapping("/personal/info")
+	public String info(Model model) {
+		List<Personal>  personalFindAll = personalService.personalFindAll();
+		System.out.println(personalFindAll.get(0).getPersonalId());
+		System.out.println("+++++++++++++");
+		model.addAttribute("personalFindAll", personalFindAll);
+		return "personal/info";
+	}
+	
+	@GetMapping("/personal/update")
+	public String update() {
+		return "personal/update";
 	}
 }

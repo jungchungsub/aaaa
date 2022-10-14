@@ -24,4 +24,8 @@ public class Personal implements Serializable {
 	public Personal(PersonalJoinDto joinDto) {
 		this.personalName = joinDto.getPersonalName();
 	}
+	
+	
+	
+	
 }

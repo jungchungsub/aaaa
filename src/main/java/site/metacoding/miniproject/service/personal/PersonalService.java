@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.miniproject.domain.personal.Personal;
+import site.metacoding.miniproject.domain.personal.PersonalDao;
 import site.metacoding.miniproject.domain.personal.detail.PersonalDetailDao;
 import site.metacoding.miniproject.domain.resumes.Resumes;
 import site.metacoding.miniproject.domain.resumes.ResumesDao;
@@ -19,8 +21,14 @@ public class PersonalService {
 	
 	private final ResumesDao resumesDao;
 	private final PersonalDetailDao personalDetailDao;
+	private final PersonalDao personalDao;
 
 	// 개인 정보 보기
+	public List<Personal> personalFindAll(){
+		List<Personal> personalList =  personalDao.findAll();
+		System.out.println("+++++++++++++");
+		return personalList;
+	}
 	
 	
 	// 이력서 작성 하기
