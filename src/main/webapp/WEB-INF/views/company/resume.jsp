@@ -37,7 +37,7 @@
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="${ empty companyLike}">
+					<c:when test="${ empty personalLike}">
 						<button id="btnlike" type="button" class="btn btn-primary">좋아요</button>
 					</c:when>
 					<c:otherwise>

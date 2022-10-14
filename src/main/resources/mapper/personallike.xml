@@ -20,7 +20,7 @@
 	</select>
 
 	<select id="findById" resultType="site.metacoding.miniproject.domain.like.personalike.PersonalLike">
-		SELECT * FROM company_like WHERE company_id =#{companyId} and personal_Id =#{personalId}
+		SELECT * FROM personal_like WHERE company_id =#{companyId} and resumes_id =#{resumesId}
 	</select>
 
 

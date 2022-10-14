@@ -1,5 +1,7 @@
 package site.metacoding.miniproject.web;
 
+
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -52,8 +54,8 @@ public class LikeController {
 		return new ResponseDto<>(1, "좋아요취소", null);
 	}
 
-	@GetMapping("/resume")
-	public String resume(@PathVariable Integer resumesId, Model mode) {
+	@GetMapping("/resume/{resumesId}")
+	public String resume(@PathVariable Integer resumesId, Model model) {
 		SignedDto<?> signedDto = (SignedDto) session.getAttribute("principal");
 		PersonalLike personalLike = personalLikeService.좋아요확인(resumesId, signedDto.getCompanyId());
 		model.addAttribute("personalLike", personalLike);
@@ -65,12 +67,6 @@ public class LikeController {
 		List<PersonalLikeDto> personalLikeDto = personalLikeService.좋아요이력서();
 		model.addAttribute("personalLikeList", personalLikeDto);
 		return "/company/recommend";
-	}
-
-	@GetMapping("/resume/{resumesId}")
-	public String companyInsert(@PathVariable Integer resumesId, Model model) {
-
-		return "/company/resume";
 	}
 
 }
