@@ -27,10 +27,9 @@ public class LikeController {
 	private final HttpSession session;
 	private final PersonalLikeService personalLikeService;
 
-
 	@PostMapping("/personalLike/{resumesId}/likes")
 	public @ResponseBody ResponseDto<?> insertLike(@PathVariable Integer resumesId) {
-		//Company company = (Company) session.getAttribute("principal");
+		// Company company = (Company) session.getAttribute("principal");
 
 		SignedDto<?> signedDto = (SignedDto) session.getAttribute("principal");
 
@@ -40,27 +39,26 @@ public class LikeController {
 	}
 
 	@PostMapping("/recommend")
-	public @ResponseBody ResponseDto<?> insertRecommend(@RequestBody InsertRecommendDto insertRecommendDto){
+	public @ResponseBody ResponseDto<?> insertRecommend(@RequestBody InsertRecommendDto insertRecommendDto) {
 		personalLikeService.좋아요이력서추가(insertRecommendDto);
 		return new ResponseDto<>(1, "이력서추가", null);
 	}
 
-
-
 	@DeleteMapping("/personalLike/{resumesId}/likes")
-	public @ResponseBody ResponseDto<?> deleteLike(@PathVariable Integer resumesId){
+	public @ResponseBody ResponseDto<?> deleteLike(@PathVariable Integer resumesId) {
 
 		SignedDto<?> signedDto = (SignedDto) session.getAttribute("principal");
 		personalLikeService.좋아요취소(resumesId, signedDto.getCompanyId());
 		return new ResponseDto<>(1, "좋아요취소", null);
 	}
 
-
 	@GetMapping("/resume")
-	public String resume() {
+	public String resume(@PathVariable Integer resumesId, Model mode) {
+		SignedDto<?> signedDto = (SignedDto) session.getAttribute("principal");
+		PersonalLike personalLike = personalLikeService.좋아요확인(resumesId, signedDto.getCompanyId());
+		model.addAttribute("personalLike", personalLike);
 		return "/company/resume";
 	}
-
 
 	@GetMapping("/recommend")
 	public String recommend(Model model) {
@@ -68,15 +66,11 @@ public class LikeController {
 		model.addAttribute("personalLikeList", personalLikeDto);
 		return "/company/recommend";
 	}
-	
+
 	@GetMapping("/resume/{resumesId}")
-	   public String companyInsert(@PathVariable Integer resumesId, Model model) {
+	public String companyInsert(@PathVariable Integer resumesId, Model model) {
 
-	      SignedDto<?> signedDto = (SignedDto) session.getAttribute("principal");
-	      PersonalLike personalLike = personalLikeService.좋아요확인(resumesId, signedDto.getCompanyId());  
-	      model.addAttribute("personalLike", personalLike);
-	      return "/company/resumes";
-	   }
-
+		return "/company/resume";
+	}
 
 }
